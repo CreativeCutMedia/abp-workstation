@@ -24,7 +24,7 @@ function StageProgress({ build }: { build: Build }) {
               ? 'bg-blue-500'
               : 'bg-zinc-700'
           }`}
-          title={`${m.label}: ${m.name}`}
+          title={`${m.name}: ${m.subtitle}`}
         />
       ))}
       <span className="text-xs text-zinc-500 ml-1">{completed}/7</span>

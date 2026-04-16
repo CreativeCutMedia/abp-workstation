@@ -163,7 +163,7 @@ export function generateFatHandoff(build: Build): string {
     const stage = s[meta.key as keyof typeof s]
     if (!stage.completed) continue
 
-    lines.push(`## ${meta.emoji} ${meta.label} — ${meta.name}`)
+    lines.push(`## ${meta.icon} ${meta.name} — ${meta.subtitle}`)
     lines.push('')
 
     switch (meta.key) {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getBuild, updateBuild, generateFatHandoff } from '../lib/storage'
-import { canComplete, stageCompleted, STAGE_META } from '../lib/stages'
+import { stageCompleted, STAGE_META } from '../lib/stages'
 import type { Build, BuildStages } from '../types'
 
 // ─── Debounce ───────────────────────────────────────────────────────────────
@@ -31,7 +31,7 @@ function StagePill({
       <span className={completed ? 'text-emerald-400' : active ? 'text-zinc-300' : 'text-zinc-600'}>
         {completed ? '●' : active ? '◐' : '○'}
       </span>
-      <span>{m.emoji} {m.label}</span>
+      <span>{m.icon} {m.name}</span>
     </button>
   )
 }
@@ -602,7 +602,7 @@ export default function Workstation() {
   const s = build.stages
   const currentMeta = STAGE_META[activeIdx]
   const isCompleted = stageCompleted(s, activeIdx)
-  const completable = canComplete(s, activeIdx)
+  const completable = stageCompleted(s, activeIdx)
   const completedCount = STAGE_META.filter((_, i) => stageCompleted(s, i)).length
 
   return (
@@ -643,10 +643,10 @@ export default function Workstation() {
           <div className="flex items-start justify-between gap-4 mb-6">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-2xl">{currentMeta.emoji}</span>
-                <h2 className="text-xl font-bold">{currentMeta.label}</h2>
+                <span className="text-2xl">{currentMeta.icon}</span>
+                <h2 className="text-xl font-bold">{currentMeta.name}</h2>
                 <span className="text-zinc-500 font-normal">—</span>
-                <span className="text-zinc-400 font-medium">{currentMeta.name}</span>
+                <span className="text-zinc-400 font-medium">{currentMeta.subtitle}</span>
                 {activeIdx === build.current_stage && (
                   <span className="text-xs px-2 py-0.5 bg-blue-950 text-blue-400 rounded-full border border-blue-900 font-medium">Current</span>
                 )}
